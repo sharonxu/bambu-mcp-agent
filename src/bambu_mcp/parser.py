@@ -79,7 +79,11 @@ def parse_3mf_metadata(file_path: str) -> Dict[str, Any]:
                             try:
                                 density = float(value) if value else None
                                 if density is not None:
-                                    metadata["infill_density"] = f"{density}%"
+                                    # Format as integer if whole number, otherwise one decimal
+                                    if density == int(density):
+                                        metadata["infill_density"] = f"{int(density)}%"
+                                    else:
+                                        metadata["infill_density"] = f"{density:.1f}%"
                             except (ValueError, TypeError):
                                 pass
                         elif key == "wall_loops":
