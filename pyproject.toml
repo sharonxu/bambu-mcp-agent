@@ -1,0 +1,20 @@
+[project]
+name = "bambu-mcp-agent"
+version = "0.1.0"
+description = "MCP server for analyzing and comparing 3D print settings using OrcaSlicer"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=0.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
