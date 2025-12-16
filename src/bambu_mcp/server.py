@@ -106,8 +106,8 @@ def _generate_recommendation(
 
 
 # Resource: 3mf://{file_path}/metadata
-@mcp.resource()
-def get_3mf_metadata(uri: str) -> Dict[str, Any]:
+@mcp.resource("3mf://{file_path}/metadata")
+def get_3mf_metadata(file_path: str) -> Dict[str, Any]:
     """
     Read current print settings from a .3mf file.
     
@@ -116,17 +116,6 @@ def get_3mf_metadata(uri: str) -> Dict[str, Any]:
     Returns metadata including filament type, nozzle diameter, layer height,
     infill density, wall loops, support settings, and previous slice info.
     """
-    # Parse URI: 3mf://{file_path}/metadata
-    if not uri.startswith("3mf://"):
-        raise ValueError(f"Invalid URI format: {uri}. Expected 3mf://{{file_path}}/metadata")
-    
-    # Extract file path from URI
-    path_part = uri[6:]  # Remove "3mf://" prefix
-    if not path_part.endswith("/metadata"):
-        raise ValueError(f"Invalid URI format: {uri}. Expected 3mf://{{file_path}}/metadata")
-    
-    file_path = path_part[:-9]  # Remove "/metadata" suffix
-    
     try:
         metadata = parse_3mf_metadata(file_path)
         logger.info(f"Successfully parsed metadata from {file_path}")
