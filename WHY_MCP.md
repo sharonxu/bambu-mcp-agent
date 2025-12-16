@@ -1,8 +1,63 @@
 # Why This is an MCP Server
 
-## What is MCP?
+## What is MCP? (The General Protocol)
 
-**MCP (Model Context Protocol)** is a protocol that lets AI assistants like Claude interact with external tools and data sources. Think of it as a standardized way for Claude to "call" functions in your code.
+**MCP (Model Context Protocol)** is an open standard protocol introduced by Anthropic in November 2024. It's designed to standardize how AI systems (not just Claude) interact with external tools, services, and data sources.
+
+### MCP as a General Standard
+
+Think of MCP like **USB-C for AI applications**:
+- **USB-C** = One connector that works with many devices
+- **MCP** = One protocol that works with many AI models and tools
+
+MCP provides a **universal interface** that allows:
+- Any AI model (Claude, GPT-4, Gemini, etc.) to connect to
+- Any tool or data source (databases, APIs, file systems, CLIs, etc.)
+- Without needing custom integrations for each combination
+
+### The Architecture
+
+MCP uses a **client-server model**:
+
+```
+┌─────────────┐         ┌──────────────┐         ┌─────────────┐
+│  AI Client  │  MCP    │  MCP Server  │         │   Tool/Data │
+│ (Claude,    │◄───────►│  (your code) │◄───────►│   Source    │
+│  GPT-4, etc)│ Protocol│              │         │             │
+└─────────────┘         └──────────────┘         └─────────────┘
+```
+
+- **MCP Client**: The AI application (Claude Desktop, Cursor, etc.)
+- **MCP Server**: Your code that exposes tools/resources (this project)
+- **Protocol**: Standardized JSON-RPC communication
+
+### Key Features of MCP
+
+1. **Standardized Integration**: One protocol works across different AI models
+2. **Tool Discovery**: AI can discover what tools are available
+3. **Resource Access**: AI can read structured data (files, databases, etc.)
+4. **Security**: Built-in authentication and access control
+5. **Extensibility**: Easy to add new tools and resources
+
+### Who Uses MCP?
+
+- **Anthropic**: Claude Desktop, Claude API
+- **OpenAI**: Adopted for their AI integrations
+- **Google DeepMind**: Using MCP for their AI systems
+- **Developers**: Building custom MCP servers for their tools
+
+### MCP vs. Other Approaches
+
+| Approach | Problem |
+|----------|---------|
+| **Custom APIs per AI** | Each AI needs different integration code |
+| **Plugin Systems** | Tied to specific platforms, not portable |
+| **Direct Tool Access** | Security risks, no standardization |
+| **MCP** ✅ | One protocol, works everywhere, secure |
+
+## What is MCP? (For This Project)
+
+In this specific project, **MCP lets Claude interact with 3D printing tools**. But the same protocol could be used by any AI to access any tool.
 
 ## The Problem MCP Solves
 
