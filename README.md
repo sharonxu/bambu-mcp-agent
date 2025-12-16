@@ -46,7 +46,21 @@ Add this to your Claude Desktop MCP configuration file (location varies by OS):
   "mcpServers": {
     "bambu-mcp": {
       "command": "python",
-      "args": ["/path/to/bambu-mcp-agent/src/bambu_mcp/server.py"]
+      "args": ["-m", "bambu_mcp"],
+      "cwd": "/path/to/bambu-mcp-agent/src"
+    }
+  }
+}
+```
+
+Or using the direct path:
+
+```json
+{
+  "mcpServers": {
+    "bambu-mcp": {
+      "command": "python",
+      "args": ["/path/to/bambu-mcp-agent/src/bambu_mcp/__main__.py"]
     }
   }
 }
